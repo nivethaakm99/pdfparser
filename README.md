@@ -10,44 +10,6 @@ The script operates through a methodical pipeline:
 3.  **Contextual Scaling:** For each identified number, it applies a sophisticated logic to infer its true scale (e.g., thousands, millions, billions) by analyzing nearby keywords in column headers, surrounding text, the current page, and document-wide disclaimers.
 4.  **Largest Value Determination:** Finally, from all the processed and scaled numbers, the script determines and reports the single greatest numerical value found across the entire document, along with its page location.
 
-## Project Pipeline
-
-The script processes PDF documents through a clear, multi-stage pipeline as visualized below:
-
-```mermaid
-graph TD
-    A[Start] --> B(PDF File Input);
-
-    B --> C{Orchestrator: main() function};
-
-    C --> D1[Step 1: Extract Tables with pdfplumber]:::process;
-    C --> D2[Step 2: Extract All Text with PyMuPDF]:::process;
-
-    D1 --> E{Tables as DataFrames};
-    D2 --> F{Text Page by Page};
-
-    E & F --> G{Combined Data: Tables & Text};
-
-    G --> H[Step 3: Find Numbers & Apply Scales]:::process;
-
-    H --> I{For Each Number Found};
-    I --> J[Clean & Convert Number]:::sub_process;
-    I --> K[Infer Scale from Context]:::sub_process;
-
-    K --> L{Scale Hierarchy Applied};
-    L --> M[Store Scaled Number & Page];
-
-    M --> N[All Scaled Numbers Collected];
-
-    N --> O[Identify Largest Scaled Number];
-
-    O --> P[Final Report: Largest Value & Page];
-    P --> Q[End];
-
-    classDef process fill:#a2d2ff,stroke:#007bff,stroke-width:2px,color:#333;
-    classDef sub_process fill:#d4f0ff,stroke:#007bff,stroke-dasharray: 5 5,color:#333;
-
-
 ## Setup and Usage
 To get this script up and running, follow these steps:
 
